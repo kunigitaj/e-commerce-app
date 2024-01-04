@@ -1,0 +1,45 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefront-deployment
+  namespace: e-commerce-app
+  labels:
+    app: storefront-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storefront-app
+  template:
+    metadata:
+      labels:
+        app: storefront-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "storefront-app"
+        dapr.io/app-port: "3000"
+        dapr.io/config: "appconfig"
+    spec:
+      containers:
+      - name: storefront-app
+        image: storefront-app # Placeholder image name
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /api/healthz
+            port: 3000
+        readinessProbe:
+          httpGet:
+            path: /api/ready
+            port: 3000

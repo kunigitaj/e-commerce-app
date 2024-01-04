@@ -1,0 +1,7 @@
+resources:
+- ../../base
+
+images:
+- name: storefront-app
+  newName: repo/storefront-app
+  newTag: "latest"

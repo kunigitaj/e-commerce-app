@@ -1,0 +1,66 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-management-deployment
+  namespace: e-commerce-app
+  labels:
+    app: stock-management-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-management-app
+  template:
+    metadata:
+      labels:
+        app: stock-management-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "stock-management-app"
+        dapr.io/app-port: "8080"
+        dapr.io/config: "appconfig"
+    spec:
+      containers:
+      - name: stock-management-app
+        image: stock-management-app # Placeholder image name
+        ports:
+        - containerPort: 8080
+        env:
+          - name: STATE_STORE_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: stock-management-config
+                key: STATE_STORE_NAME
+          - name: PUBSUB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: stock-management-config
+                key: PUBSUB_NAME
+          - name: MAX_RETRIES
+            valueFrom:
+              configMapKeyRef:
+                name: stock-management-config
+                key: MAX_RETRIES
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: stock-management-config
+                key: PORT
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080

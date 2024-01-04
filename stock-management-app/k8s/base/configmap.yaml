@@ -1,0 +1,12 @@
+# configmap.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stock-management-config
+  namespace: e-commerce-app
+data:
+  STATE_STORE_NAME: "statestore"
+  PUBSUB_NAME: "orderpubsub"
+  MAX_RETRIES: "3"
+  PORT: "8080"

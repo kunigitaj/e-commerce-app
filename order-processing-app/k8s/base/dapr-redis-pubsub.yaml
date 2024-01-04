@@ -1,0 +1,19 @@
+# redis-pubsub.yaml
+
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: orderpubsub
+  namespace: e-commerce-app
+spec:
+  type: pubsub.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    secretKeyRef:
+      name: redis-secret
+      key: redis-host
+  - name: redisPassword
+    secretKeyRef:
+      name: redis-secret
+      key: redis-password

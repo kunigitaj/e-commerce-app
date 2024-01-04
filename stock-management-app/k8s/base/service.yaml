@@ -1,0 +1,15 @@
+# service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-management-service
+  namespace: e-commerce-app
+spec:
+  selector:
+    app: stock-management-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP

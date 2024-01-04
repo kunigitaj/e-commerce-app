@@ -1,0 +1,14 @@
+# service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendation-service
+  namespace: e-commerce-app
+spec:
+  selector:
+    app: recommendation-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

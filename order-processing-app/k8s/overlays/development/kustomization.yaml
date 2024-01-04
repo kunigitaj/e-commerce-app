@@ -1,0 +1,7 @@
+resources:
+- ../../base
+
+images:
+- name: order-processing-app
+  newName: repo/order-processing-app
+  newTag: "latest"

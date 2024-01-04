@@ -1,0 +1,7 @@
+resources:
+- ../../base
+
+images:
+- name: stock-management-app
+  newName: repo/stock-management-app
+  newTag: "latest"

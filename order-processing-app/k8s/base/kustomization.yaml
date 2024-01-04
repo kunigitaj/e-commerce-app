@@ -1,0 +1,9 @@
+resources:
+- dapr-config.yaml
+- dapr-redis-pubsub.yaml
+- dapr-redis-statestore.yaml
+- dapr-tracing-config.yaml
+- order-processed-subscription.yaml
+- stock-update-subscription.yaml
+- deployment.yaml
+- service.yaml

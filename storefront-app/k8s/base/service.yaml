@@ -1,0 +1,14 @@
+# service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: storefront-service
+  namespace: e-commerce-app
+spec:
+  selector:
+    app: storefront-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

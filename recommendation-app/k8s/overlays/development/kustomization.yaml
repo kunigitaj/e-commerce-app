@@ -1,0 +1,7 @@
+resources:
+- ../../base
+
+images:
+- name: recommendation-app
+  newName: repo/recommendation-app
+  newTag: "latest"
